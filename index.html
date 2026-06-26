@@ -62,34 +62,31 @@
       box-shadow: 0 25px 60px rgba(121, 0, 65, 0.28);
     }
 
-    /* Countdown Popup Styles */
+    /* PERMANENT COUNTDOWN LOCK OVERLAY */
     .lock-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(15, 2, 18, 0.88);
-      backdrop-filter: blur(25px);
-      z-index: 100;
+      background: rgba(12, 2, 15, 0.93);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      z-index: 99999; /* Higher priority to ensure it stays on top */
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 1.5rem;
-      animation: fadeIn 1s ease forwards;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      overflow-y: auto;
     }
     
     .countdown-box {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 2rem;
-      box-shadow: 0 0 50px rgba(255, 47, 134, 0.3);
+      box-shadow: 0 0 60px rgba(255, 47, 134, 0.25);
       animation: scaleUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     }
     @keyframes scaleUp {
-      from { transform: scale(0.9) translateY(20px); opacity: 0; }
-      to { transform: scale(1) translateY(0); opacity: 1; }
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
     }
 
     .pulse-heart {
@@ -97,7 +94,7 @@
     }
     @keyframes pulse {
       0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(255,47,134,0.6)); }
-      50% { transform: scale(1.15); filter: drop-shadow(0 0 20px rgba(255,47,134,0.9)); }
+      50% { transform: scale(1.18); filter: drop-shadow(0 0 25px rgba(255,47,134,0.9)); }
     }
 
     .gift-box {
@@ -169,15 +166,6 @@
       50% { transform: translateY(-28px) rotate(4deg); }
     }
 
-    .typing {
-      border-right: 3px solid #ff2e83;
-      white-space: nowrap;
-      overflow: hidden;
-      animation: typing 3.5s steps(40), blink .7s infinite;
-    }
-    @keyframes typing { from { width: 0; } to { width: 100%; } }
-    @keyframes blink { 50% { border-color: transparent; } }
-
     .cake {
       position: relative;
       width: 210px;
@@ -248,43 +236,43 @@
 </head>
 <body class="min-h-screen flex items-center justify-center px-4 text-black relative">
 
-  <div id="countdownLock" class="lock-overlay hidden">
-    <div class="countdown-box max-w-xl w-full p-8 text-center text-white backdrop-blur-md">
-      <div class="text-6xl mb-4 pulse-heart">💖</div>
-      <h2 class="font-love text-4xl sm:text-5xl text-pink-400 mb-2">Wishing You an Happiest Birthday Purnima</h2>
-      <p class="text-pink-200 tracking-widest uppercase text-xs mb-6 font-semibold">Stay Forever Blessed in Advance ✨</p>
+  <div id="countdownLock" class="lock-overlay">
+    <div class="countdown-box max-w-xl w-full p-6 sm:p-8 text-center text-white backdrop-blur-md m-2">
+      <div class="text-5xl mb-3 pulse-heart">💖</div>
+      <h2 class="font-love text-4xl sm:text-5xl text-pink-400 mb-2">Wishing You an happiest birthday Purnima</h2>
+      <p class="text-pink-200 tracking-widest uppercase text-xs mb-6 font-semibold font-sans">Stay Forever blessed in advance ✨</p>
       
-      <div class="grid grid-cols-4 gap-2 max-w-sm mx-auto mb-8 bg-black/30 p-4 rounded-2xl border border-white/10">
+      <div class="grid grid-cols-4 gap-2 max-w-xs sm:max-w-sm mx-auto mb-6 bg-black/40 p-4 rounded-2xl border border-white/10">
         <div>
-          <div id="days" class="text-3xl font-bold text-white">00</div>
-          <div class="text-[10px] text-gray-400 uppercase tracking-wider">Days</div>
+          <div id="days" class="text-2xl sm:text-3xl font-bold text-white">00</div>
+          <div class="text-[9px] text-gray-400 uppercase tracking-wider">Days</div>
         </div>
         <div>
-          <div id="hours" class="text-3xl font-bold text-white">00</div>
-          <div class="text-[10px] text-gray-400 uppercase tracking-wider">Hrs</div>
+          <div id="hours" class="text-2xl sm:text-3xl font-bold text-white">00</div>
+          <div class="text-[9px] text-gray-400 uppercase tracking-wider">Hrs</div>
         </div>
         <div>
-          <div id="minutes" class="text-3xl font-bold text-white">00</div>
-          <div class="text-[10px] text-gray-400 uppercase tracking-wider">Mins</div>
+          <div id="minutes" class="text-2xl sm:text-3xl font-bold text-white">00</div>
+          <div class="text-[9px] text-gray-400 uppercase tracking-wider">Mins</div>
         </div>
         <div>
-          <div id="seconds" class="text-3xl font-bold text-pink-400">00</div>
-          <div class="text-[10px] text-gray-400 uppercase tracking-wider">Secs</div>
+          <div id="seconds" class="text-2xl sm:text-3xl font-bold text-pink-400">00</div>
+          <div class="text-[9px] text-gray-400 uppercase tracking-wider">Secs</div>
         </div>
       </div>
 
       <div class="space-y-4 text-sm sm:text-base text-gray-200 font-light max-w-md mx-auto leading-relaxed border-t border-white/10 pt-4">
         <p>
-          Some things in life are worth waiting for, just like the clock ticking towards your special day. Please wait until <span class="text-pink-300 font-medium">29 June (00:00:00)</span> to unlock what lies inside.
+          Please wait for <span class="text-pink-300 font-semibold">29 June</span> to view what's hidden inside this page. Until then, stay in touch with me...
         </p>
-        <p class="italic text-pink-200/90 text-sm">
-          "Loving you quietly for 3 beautiful years has taught me that true affection asks for nothing but your happiness. Until the magic unfolds, please stay in touch with me..."
+        <p class="italic text-pink-200/90 text-sm bg-white/5 p-3 rounded-xl border border-white/5 shadow-inner">
+          "Loving you unconditionally for 3 beautiful years without expecting anything in return has taught me the truest meaning of patience. Even if my feelings are mine alone, your happiness will always remain my deepest prayer."
         </p>
-        <p class="font-medium text-pink-400 text-base mt-2">— Amit Joshi</p>
+        <p class="font-semibold text-pink-400 text-base mt-2">— Amit Joshi</p>
       </div>
       
-      <div class="text-xs text-gray-500 mt-6 tracking-wide border-t border-white/5 pt-3">
-        With Love and Wishes by Amit
+      <div class="text-xs text-gray-400 mt-6 tracking-wide border-t border-white/5 pt-3 font-mono">
+        with love and Wishes by amit
       </div>
     </div>
   </div>
@@ -356,11 +344,11 @@
     const heartGame = document.getElementById('heartGame');
     const scoreEl = document.getElementById('score');
 
-    // COUNTDOWN & LOCK POPUP SYSTEM
+    // LIVE AUTOMATIC COUNTDOWN CONTROLLER
     function initCountdown() {
       const lockOverlay = document.getElementById('countdownLock');
       
-      // Target Date: June 29th, 00:00:00 (of the current year dynamically)
+      // Forces Target Lock to June 29th, 00:00:00 local time
       const currentYear = new Date().getFullYear();
       const targetDate = new Date(`June 29, ${currentYear} 00:00:00`).getTime();
 
@@ -368,30 +356,26 @@
         const now = new Date().getTime();
         const difference = targetDate - now;
 
-        // If the date has passed or is exactly June 29 00:00:00, hide the popup entirely
+        // Auto-unlock happens here exactly at 00:00:00 on June 29
         if (difference <= 0) {
-          lockOverlay.classList.add('hidden');
+          lockOverlay.style.display = 'none';
           clearInterval(timerInterval);
           return;
         }
 
-        // Keep popup visible if time remains
-        lockOverlay.classList.remove('hidden');
-
-        // Math for days, hours, minutes, seconds
+        // Calculate values dynamically
         const d = Math.floor(difference / (1000 * 60 * 60 * 24));
         const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
         const s = Math.floor((difference % (1000 * 60)) / 1000);
 
-        // Display with leading zeros
+        // Render values with padded double-digits
         document.getElementById('days').textContent = d < 10 ? '0' + d : d;
         document.getElementById('hours').textContent = h < 10 ? '0' + h : h;
         document.getElementById('minutes').textContent = m < 10 ? '0' + m : m;
         document.getElementById('seconds').textContent = s < 10 ? '0' + s : s;
       }
 
-      // Run instantly and set interval
       updateTimer();
       const timerInterval = setInterval(updateTimer, 1000);
     }
@@ -487,7 +471,6 @@
       showStep(0);
     }
 
-    // Run layout features on load
     createFloatingHearts();
     createSparkles();
     initCountdown();
